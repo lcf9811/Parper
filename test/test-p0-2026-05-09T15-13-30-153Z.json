@@ -1,0 +1,128 @@
+{
+  "total": 29,
+  "passed": 24,
+  "failed": 5,
+  "skipped": 1,
+  "details": [
+    {
+      "status": "FAIL",
+      "message": "API /api/skills 返回的技能对象包含 built_in 字段"
+    },
+    {
+      "status": "FAIL",
+      "message": "内置技能 general_assistant 的 built_in = 1（实际值: undefined）"
+    },
+    {
+      "status": "FAIL",
+      "message": "所有内置技能 built_in=1（检查了 4 个技能）"
+    },
+    {
+      "status": "PASS",
+      "message": "runtimeStreaming.ts 中处理了 role=tool 的消息（应使用 ToolMessage）"
+    },
+    {
+      "status": "PASS",
+      "message": "runtimeStreaming.ts 中处理了 role=system 的消息（应使用 SystemMessage）"
+    },
+    {
+      "status": "PASS",
+      "message": "runtime.ts 中处理了 role=tool 的消息"
+    },
+    {
+      "status": "PASS",
+      "message": "runtime.ts 中处理了 role=system 的消息"
+    },
+    {
+      "status": "PASS",
+      "message": "runtimeStreaming.ts 不再使用简单的 user→HumanMessage / else→AIMessage 模式"
+    },
+    {
+      "status": "PASS",
+      "message": "执行在超时内完成（最终状态: completed）"
+    },
+    {
+      "status": "FAIL",
+      "message": "消息历史中存在包含 tool_calls 的消息（工具调用已持久化）"
+    },
+    {
+      "status": "FAIL",
+      "message": "消息历史中存在 role=tool 的消息（工具结果已持久化）"
+    },
+    {
+      "status": "PASS",
+      "message": "回复为自然语言而非原始工具输出（回复前100字符: 现在几点了？我来帮您查看当前时间。）"
+    },
+    {
+      "status": "PASS",
+      "message": "回复长度合理（17 字符），非空或极短"
+    },
+    {
+      "status": "PASS",
+      "message": "AgentState 中定义了最大工具调用次数限制字段"
+    },
+    {
+      "status": "PASS",
+      "message": "shouldCallTools 或 agent 节点中检查了循环次数上限"
+    },
+    {
+      "status": "PASS",
+      "message": "循环检查中使用了正确的比较运算符"
+    },
+    {
+      "status": "PASS",
+      "message": "localSkillLoader.ts 读取了技能目录下的 references/ 文件夹"
+    },
+    {
+      "status": "PASS",
+      "message": "localSkillLoader.ts 有将引用文档入库的逻辑"
+    },
+    {
+      "status": "PASS",
+      "message": "localSkillLoader.ts 有自动加载/同步引用文档的机制"
+    },
+    {
+      "status": "PASS",
+      "message": "init.sql 中 knowledge_chunks 表的 FULLTEXT 索引使用了 ngram 解析器"
+    },
+    {
+      "status": "SKIP",
+      "message": "创建测试知识文档失败，跳过搜索测试"
+    },
+    {
+      "status": "PASS",
+      "message": "Chat.tsx 使用 useRef 保存 streamingTimeout ID 且有 clearTimeout"
+    },
+    {
+      "status": "PASS",
+      "message": "handleSSEComplete 函数中调用了 clearTimeout 清理定时器"
+    },
+    {
+      "status": "PASS",
+      "message": "Chat.tsx 在建立新 SSE 连接前清除了旧定时器"
+    },
+    {
+      "status": "PASS",
+      "message": "Chat.tsx 使用 sessionIdRef 跟踪当前会话"
+    },
+    {
+      "status": "PASS",
+      "message": "handleSSEComplete 中使用了 sessionIdRef"
+    },
+    {
+      "status": "PASS",
+      "message": "切换会话时清理了活跃的 SSE 连接"
+    },
+    {
+      "status": "PASS",
+      "message": "临时消息使用了 executionId 或稳定 key"
+    },
+    {
+      "status": "PASS",
+      "message": "loadMessages 有合并或保留临时消息的逻辑"
+    },
+    {
+      "status": "PASS",
+      "message": "handleSend 函数在 setLoading(true) 之前有防重复发送的守卫逻辑"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "wagent-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --no-node-snapshot --import tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:init": "node --no-node-snapshot --import tsx src/scripts/dbInit.ts",
+    "test": "node --no-node-snapshot --import tsx tests/runTests.ts",
+    "test:unit": "node --no-node-snapshot --import tsx tests/runTests.ts unit",
+    "test:e2e": "node --no-node-snapshot --import tsx tests/runTests.ts e2e"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.40",
+    "@langchain/langgraph": "^0.2.50",
+    "@langchain/openai": "^0.4.9",
+    "@types/js-yaml": "^4.0.9",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "js-yaml": "^4.1.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.12.0",
+    "node-fetch": "^2.7.0",
+    "uuid": "^11.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.13.10",
+    "@types/uuid": "^10.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir sql:*)",
+      "Bash(mkdir server\\\\src\\\\config)",
+      "Bash(mkdir server\\\\src\\\\models)",
+      "Bash(mkdir server\\\\src\\\\services)",
+      "Bash(mkdir server\\\\src\\\\graph)",
+      "Bash(dir /s /b /a:-d)",
+      "Bash(findstr /v \"node_modules\")",
+      "Bash([ ! -f .env ])",
+      "Bash(cp .env.example .env)",
+      "Bash(npm install:*)",
+      "Bash(ls -d */)",
+      "Bash(npm run:*)",
+      "Bash(node \"d:/Documents and Settings/changhuaizhuit/My Documents/workspace/claude_workspace/wagent/test/wagent-test-suite.js\")",
+      "Bash(node \"d:/Documents and Settings/changhuaizhuit/My Documents/workspace/claude_workspace/wagent/test-api.js\")",
+      "Bash(pkill -f \"tsx.*index\")",
+      "Bash(node start.bat)",
+      "Bash(pkill -f \"tsx\")",
+      "Bash(pkill -f \"vite\")",
+      "Bash(npx concurrently *)",
+      "Bash(curl -s http://localhost:8787/api/health)",
+      "Bash(powershell -Command \"Stop-Process -Id 34344 -Force\")",
+      "Bash(netstat -ano)",
+      "Bash(findstr 8787)",
+      "Bash(node --import tsx src/index.ts)",
+      "PowerShell(Stop-Process -Id 32636 -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Process -Name node -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force)"
+    ]
+  }
+}

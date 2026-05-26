@@ -1,0 +1,22 @@
+# Source code (not needed in production, built assets are in dist/)
+server/src/
+server/tests/
+server/node_modules/
+web/src/
+web/node_modules/
+web/public/
+
+# Development
+*.md
+.git/
+.vscode/
+.claude/
+*.log
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+coverage/

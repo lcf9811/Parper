@@ -1,0 +1,437 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans SC', sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ===== 聊天区域 ===== */
+.chat-container {
+  display: flex;
+  height: calc(100vh - 64px);
+  min-height: 0;
+}
+
+.chat-sidebar {
+  width: 260px;
+  border-right: 1px solid #e8e8e8;
+  background: #fafbfc;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.2s ease, min-width 0.2s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.chat-sidebar.collapsed {
+  width: 0;
+  min-width: 0;
+  border-right: none;
+}
+
+/* 侧栏折叠按钮 */
+.sidebar-toggle {
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f5f6fa;
+  border-right: 1px solid #e8e8e8;
+  cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.sidebar-toggle:hover {
+  background: #e8ecf1;
+}
+
+/* 右侧面板折叠按钮 */
+.panel-toggle {
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f5f6fa;
+  border-left: 1px solid #e8e8e8;
+  cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.panel-toggle:hover {
+  background: #e8ecf1;
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: #f5f6fa;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+}
+
+.chat-input-area {
+  padding: 16px 24px;
+  border-top: 1px solid #e8e8e8;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+/* ===== 消息气泡 ===== */
+.message-item {
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.message-item.user {
+  justify-content: flex-end;
+}
+
+.message-bubble {
+  max-width: 85%;
+  padding: 8px 14px;
+  border-radius: 16px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.message-bubble.user {
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.message-bubble.assistant {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-bottom-left-radius: 4px;
+}
+
+/* ===== 流式消息 ===== */
+.message-bubble.streaming {
+  max-width: 90%;
+  width: 100%;
+  background: #fafbfc;
+}
+
+/* ===== Markdown 内容 ===== */
+.message-content {
+  line-height: 1.5;
+  font-size: 14px;
+  color: inherit;
+}
+
+.markdown-body {
+  color: inherit;
+}
+
+.markdown-body > *:first-child {
+  margin-top: 0;
+}
+
+.markdown-body > *:last-child {
+  margin-bottom: 0;
+}
+
+.message-content p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.message-content p:first-child {
+  margin-top: 0;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.message-content br {
+  display: none;
+}
+
+/* 消除空段落（包括只含空白字符的段落）占据的空间 */
+.message-content p:empty,
+.message-content p:has(> br:only-child) {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}
+
+/* 消除只有空白字符的段落 */
+.message-content p {
+  white-space: normal;
+}
+
+.message-content p + p {
+  margin-top: 2px;
+}
+
+.message-content h1,
+.message-content h2,
+.message-content h3,
+.message-content h4 {
+  margin: 2px 0 1px 0;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.message-content h1 { font-size: 1.1em; }
+.message-content h2 { font-size: 1.05em; }
+.message-content h3 { font-size: 1em; }
+.message-content h4 { font-size: 0.96em; }
+
+/* 标题后紧跟任何内容时去掉标题底部 margin */
+.message-content h1 + *,
+.message-content h2 + *,
+.message-content h3 + *,
+.message-content h4 + * {
+  margin-top: 0;
+}
+
+/* 标题上方紧跟段落时去掉段落底部 margin */
+.message-content p + h1,
+.message-content p + h2,
+.message-content p + h3,
+.message-content p + h4 {
+  margin-top: 3px;
+}
+
+.message-content ul,
+.message-content ol {
+  margin: 0;
+  padding-left: 16px;
+}
+
+/* 嵌套列表进一步压缩间距 */
+.message-content li > ul,
+.message-content li > ol {
+  margin: 0;
+  padding-left: 14px;
+}
+
+.message-content li {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.message-content li + li {
+  margin-top: 1px;
+}
+
+/* 列表项中的段落去掉上下 margin */
+.message-content li > p {
+  margin: 0;
+}
+
+.message-content code {
+  background: #f0f0f0;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.85em;
+}
+
+.message-content pre {
+  background: #1e1e2e;
+  border-radius: 8px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  margin: 8px 0;
+  max-height: 300px;
+  overflow-y: auto;
+  font-size: 0.85em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.message-content pre code {
+  background: transparent;
+  padding: 0;
+  color: #cdd6f4;
+  font-size: 0.92em;
+  line-height: 1.45;
+}
+
+.message-content blockquote {
+  border-left: 3px solid #6366f1;
+  margin: 6px 0;
+  padding: 6px 12px;
+  background: #f5f3ff;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95em;
+}
+
+.message-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 6px 0;
+  font-size: 0.88em;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.message-content th,
+.message-content td {
+  border: 1px solid #e5e7eb;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.message-content th {
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+.message-content hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 8px 0;
+}
+
+.message-content a {
+  color: #6366f1;
+  text-decoration: none;
+}
+
+.message-content a:hover {
+  text-decoration: underline;
+}
+
+.message-content li p {
+  margin: 0;
+}
+
+.message-content > * + * {
+  margin-top: 4px;
+}
+
+/* ===== 侧边面板 ===== */
+.side-panel {
+  width: 280px;
+  min-width: 280px;
+  border-left: 1px solid #e8e8e8;
+  background: #fff;
+  overflow-y: auto;
+  padding: 16px;
+  flex-shrink: 0;
+  transition: width 0.2s ease, min-width 0.2s ease, padding 0.2s ease;
+}
+
+.side-panel.collapsed {
+  width: 0;
+  min-width: 0;
+  border-left: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ===== Dropdown 样式修复 ===== */
+.ant-dropdown-menu-submenu-popup,
+.ant-dropdown-overlay,
+.ant-dropdown-hidden,
+div[class*="ant-dropdown"],
+.ant-dropdown,
+.ant-dropdown-placement-bottomRight,
+.ant-dropdown-menu-root {
+  z-index: 1050 !important;
+}
+
+.ant-dropdown-menu-submenu-popup::before,
+.ant-dropdown-menu-submenu-popup::after,
+.ant-dropdown::before,
+.ant-dropdown::after {
+  display: none !important;
+  background: transparent !important;
+  opacity: 0 !important;
+}
+
+body {
+  pointer-events: auto !important;
+  overflow: auto !important;
+}
+
+body.ant-dropdown-overlay-hidden,
+body[class*="ant-dropdown"] {
+  overflow: auto !important;
+}
+
+.ant-dropdown-menu,
+.ant-dropdown-menu-vertical,
+.ant-dropdown-menu-light {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ===== 通用卡片样式优化 ===== */
+.ant-card {
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+.ant-card-head {
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+/* ===== 表格样式优化 ===== */
+.ant-table {
+  border-radius: 8px;
+}
+
+.ant-table-thead > tr > th {
+  background: #fafbfc !important;
+  font-weight: 600 !important;
+}
+
+/* ===== Modal 圆角 ===== */
+.ant-modal-content {
+  border-radius: 12px !important;
+}
+
+.ant-modal-header {
+  border-radius: 12px 12px 0 0 !important;
+}
+
+/* ===== Button 样式 ===== */
+.ant-btn-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%) !important;
+  border: none !important;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3) !important;
+}
+
+.ant-btn-primary:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%) !important;
+}
+
+/* ===== Tag 样式 ===== */
+.ant-tag {
+  border-radius: 6px !important;
+  padding: 2px 10px !important;
+  font-size: 12px !important;
+  line-height: 20px !important;
+}

@@ -1,0 +1,159 @@
+{
+  "results": {
+    "total": 36,
+    "passed": 31,
+    "failed": 5,
+    "skipped": 1,
+    "details": [
+      {
+        "status": "PASS",
+        "message": "回复不是原始 ToolMessage 输出"
+      },
+      {
+        "status": "PASS",
+        "message": "回复是自然语言（内容: 现在几点了？我来帮您查询当前时间。）"
+      },
+      {
+        "status": "PASS",
+        "message": "回复长度合理（17 字符）"
+      },
+      {
+        "status": "FAIL",
+        "message": "runtimeStreaming.ts 不再使用固定道歉消息作为默认回复"
+      },
+      {
+        "status": "PASS",
+        "message": "runtimeStreaming.ts 有从最终 state 提取回复的兜底逻辑"
+      },
+      {
+        "status": "PASS",
+        "message": "on_chain_end 事件匹配条件足够宽松以捕获 tool_calls 场景"
+      },
+      {
+        "status": "PASS",
+        "message": "runtimeStreaming.ts 处理了 tool_calls 后提取最终回复"
+      },
+      {
+        "status": "PASS",
+        "message": "sseService.ts 采用了防止新旧连接竞态的保护措施（客户端 ID 或 res 校验）"
+      },
+      {
+        "status": "PASS",
+        "message": "runtimeStreaming.ts 有 on_chain_end 兜底逻辑"
+      },
+      {
+        "status": "PASS",
+        "message": "兜底逻辑检查了 lastMsg 的 content/text 等字段"
+      },
+      {
+        "status": "PASS",
+        "message": "兜底逻辑能处理 content 为空但有工具调用的场景"
+      },
+      {
+        "status": "PASS",
+        "message": "stream 循环后有最终回复提取逻辑"
+      },
+      {
+        "status": "PASS",
+        "message": "init.sql 中 agent_skills 表定义了 built_in 字段"
+      },
+      {
+        "status": "PASS",
+        "message": "init.sql 中种子数据 INSERT 包含了 built_in 值"
+      },
+      {
+        "status": "FAIL",
+        "message": "API /api/skills 返回的技能对象包含 built_in 字段"
+      },
+      {
+        "status": "PASS",
+        "message": "init.sql 中 knowledge_chunks 的 FULLTEXT 索引使用 ngram 解析器"
+      },
+      {
+        "status": "PASS",
+        "message": "存在 ngram 迁移脚本 migration_knowledge_ngram.sql"
+      },
+      {
+        "status": "SKIP",
+        "message": "创建测试知识文档失败"
+      },
+      {
+        "status": "PASS",
+        "message": "close EventSource 前调用了 removeEventListener"
+      },
+      {
+        "status": "PASS",
+        "message": "ChatMessage.tsx 使用 React.memo 包裹组件"
+      },
+      {
+        "status": "FAIL",
+        "message": "StreamingMessage.tsx 使用 React.memo 包裹组件"
+      },
+      {
+        "status": "PASS",
+        "message": "loadMessages 有数据对比逻辑，无变化时跳过 setMessages"
+      },
+      {
+        "status": "PASS",
+        "message": "发送按钮 disabled 条件包含 isStreaming"
+      },
+      {
+        "status": "PASS",
+        "message": "发送按钮 disabled 同时使用 loading 和 isStreaming"
+      },
+      {
+        "status": "PASS",
+        "message": "即使 finally 中 setLoading(false)，按钮仍被 isStreaming 保护"
+      },
+      {
+        "status": "PASS",
+        "message": "ExecutionLog.tsx 有定时轮询步骤的逻辑"
+      },
+      {
+        "status": "PASS",
+        "message": "轮询有停止条件（执行完成或步骤完整时停止）"
+      },
+      {
+        "status": "PASS",
+        "message": "轮询间隔合理（2000ms，建议 500-5000ms）"
+      },
+      {
+        "status": "PASS",
+        "message": "前端有 ErrorBoundary 组件包裹应用根节点"
+      },
+      {
+        "status": "PASS",
+        "message": "ErrorBoundary 有 fallback UI（错误时显示提示信息）"
+      },
+      {
+        "status": "FAIL",
+        "message": "knowledgeLookup.ts 不再返回固定中文话术"
+      },
+      {
+        "status": "PASS",
+        "message": "knowledgeLookup.ts 返回结构化数据（JSON 格式）"
+      },
+      {
+        "status": "PASS",
+        "message": "有明确的\"无结果\"信号（如 found: false 或 count: 0）"
+      },
+      {
+        "status": "PASS",
+        "message": "自动检索和工具检索两条路径有去重/防重复机制"
+      },
+      {
+        "status": "FAIL",
+        "message": "未找到 knowledgeRetrievalNode 函数定义"
+      },
+      {
+        "status": "PASS",
+        "message": "errorHandler.ts 检查了运行环境（NODE_ENV）"
+      },
+      {
+        "status": "PASS",
+        "message": "生产环境返回通用错误消息而非原始堆栈"
+      }
+    ]
+  },
+  "defectResults": {}
+}
